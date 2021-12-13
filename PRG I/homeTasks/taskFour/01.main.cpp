@@ -29,7 +29,7 @@ int main() {
 	string userInput = "";
 	cin >> userInput;
 	
-	if ((userInput[2] != ':') || (userInput[2] != ':')) {
+	if ((userInput[2] != ':') || (userInput[5] != ':')) {
 		cout << "Incorrect format (:)" << endl;
 		return 0;
 	}
