@@ -4,7 +4,6 @@
 #include <iostream>
 #include <conio.h>
 using namespace std;
-
 int main()
 {
 	char c;
@@ -20,6 +19,7 @@ int main()
 
 #include <iostream>
 #include <conio.h>
+#include <stdlib.h> // Do I really need this lib?
 
 using namespace std;
 
@@ -43,16 +43,33 @@ int main() {
 	
 	cout << "Test string for: -> "<< test << endl;*/
 	
-	string part0 = userInput.substr(0,2);
-	string part1 = userInput.substr(3,2);
-	string part2 = userInput.substr(6,2);
+	string pair0 = userInput.substr(0,2);
+	string pair1 = userInput.substr(3,2);
+	string pair2 = userInput.substr(6,2);
 	
-	cout << "Part 0: " << part0 << endl;
-	cout << "Part 1: " << part1 << endl;
-	cout << "Part 2: " << part2 << endl;
+	cout << "Part 0: " << pair0 << endl;
+	cout << "Part 1: " << pair1 << endl;
+	cout << "Part 2: " << pair2 << endl;
 	
+	int hours = atoi(pair0);
+    cout << "hours as int: " << hours << endl;
+    int minutes = atoi(pair1);
+    cout << "minutes as int: " << minutes << endl;
+    int seconds = atoi(pair2);
+    cout << "seconds as int: " << seconds << endl;
+    
+    if ((hours < 0) || (hours > 23)) {
+        cout << "Incorrect time (hours)" << endl;
+        return 0;
+    } else if ((minutes < 0) || (minutes > 59)) {
+        cout << "Incorrect time (minutes)" << endl;
+        return 0;
+    } else if ((seconds < 0) || (seconds > 59)) {
+        cout << "Incorrect time (seconds)" << endl;
+        return 0;
+    } else {
+        cout << "Oll Korrect" << endl;
+    }
 	
-	cout << "Here: " << userInput << endl;
 	
 	return 0;
-}
