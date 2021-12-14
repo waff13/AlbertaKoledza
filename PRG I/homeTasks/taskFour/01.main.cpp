@@ -112,9 +112,6 @@ int main() {
 		cout << "This time is OK!" << endl;
 	}*/
 	
-	return 0;
-}
-	
 	/*int hours = stoi(pair0);
     cout << "hours as int: " << hours << endl;
     int minutes = stoi(pair1);
