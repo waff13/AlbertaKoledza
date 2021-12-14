@@ -70,10 +70,10 @@ int main() {
 	//cout << "pair0[0] = " << hours[0] << ", pair0[1] = " << hours[1] << endl;
 	//cout << "(int) pair0[0] = " << (int) hours[0] << ", (int) pair0[1] = " << (int) hours[1] << endl;
 	
-	// We check each symbol for correctness, converting it to integer and checking against ASCII table where 0 = 48 and 9 = 57.
-	// Since hours can be from 00 to 23 we should check the first symbol is between 0 (48 in ASCII) and 2 (50), and the second 
-	// is between 0 (48) and 3 (51). For minutes and seconds it is from 00 to 59, so the first symbol is > 0 and < 6, the 
-	// second -- > 0 and < 9. 
+	/* We check each symbol for correctness, converting it to integer and checking against ASCII table where 0 = 48 and 9 = 57.
+	Since hours can be from 00 to 23 we should check the first symbol is between 0 (48 in ASCII) and 2 (50), and the second 
+	is between 0 (48) and 3 (51). For minutes and seconds it is from 00 to 59, so the first symbol is > 0 and < 6, the 
+	second -- > 0 and < 9. THAT APPROACH IS NOT ENTIRELY CORRECT!!1
 	
 	if ( (((int)hours[0]) < 48 || ((int)hours[0] > 50)) || (((int)hours[1] < 48) || ((int)hours[1] > 51)) )
 	{
@@ -84,7 +84,36 @@ int main() {
         cout << "Incorrect time (seconds)" << endl;
     } else {
         cout << "This time is OK!" << endl;
-    }
+    }*/
+	
+	// We check each of strings for hours, minutes and seconds for correctness, converting it to integer with stoi() function.
+	// Since hours can be from 00 to 23 we should check that hours are > 0 and < 23. For minutes and seconds it is from 
+	// 00 to 59, so we should check that these are > 0 and < 59. 
+	
+	if ((stoi(hours) < 0) || (stoi(hours) > 23)) {
+		cout << "Incorrect time (hours)" << endl;
+	} else if ((stoi(minutes) < 0) || (stoi(minutes) > 59)) {
+		cout << "Incorrect time (minutes)" << endl;
+	} else if ((stoi(seconds) < 0) || (stoi(seconds) > 59)) {
+		cout << "Incorrect time (seconds)" << endl;
+	} else {
+		cout << "This time is OK!" << endl;
+	}
+	
+	
+	/*if ( (((int)hours[0]) < 48 || ((int)hours[0] > 50)) || (((int)hours[1] < 48) || ((int)hours[1] > 51)) )
+	{
+		cout << "Incorrect time (hours)" << endl;
+	} else if ((((int)minutes[0]) < 48 || ((int)minutes[0] > 53)) || (((int)minutes[1] < 48) || ((int)minutes[1] > 57))) {
+		cout << "Incorrect time (minutes)" << endl;
+	} else if ((((int)seconds[0]) < 48 || ((int)seconds[0] > 53)) || (((int)minutes[1] < 48) || ((int)minutes[1] > 57))) {
+		cout << "Incorrect time (seconds)" << endl;
+	} else {
+		cout << "This time is OK!" << endl;
+	}*/
+	
+	return 0;
+}
 	
 	/*int hours = stoi(pair0);
     cout << "hours as int: " << hours << endl;
