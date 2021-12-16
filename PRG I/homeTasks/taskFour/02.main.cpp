@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <time.h> 
 
 using namespace std;
 
@@ -16,6 +17,7 @@ string checkMove(char userInput, string openWord, string dottedWord);
 
 string getRandomWord() {
     
+    srand (time(NULL)); // initializing random seed
     int selected = (rand() % (RANGE)); // getting random number
     string result = dictionary[selected]; // getting the word from dictionary with that random number
     string temp = dictionary[selected]; // and then moving this word to the end of the array
@@ -107,8 +109,8 @@ int main() {
 			dottedWord.append(".");
 		}
 		
-		cout << "  openWord: " << openWord << endl;
-		cout << "dottedWord: " << dottedWord << endl;
+		//cout << "  openWord: " << openWord << endl;
+		//cout << "dottedWord: " << dottedWord << endl;
 		
 		char userInput;
 		//while(userInput != 48)
