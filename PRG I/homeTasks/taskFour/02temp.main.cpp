@@ -4,30 +4,32 @@
 using namespace std;
 
 int POINTSCOUNTER = 0;
-int STEPSTOWIN = 5;
+int WORDSGUESSED = 0;
 bool GAMEOVER = false;
-int range = 10;
-string dictionary[] = {"alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "india", "kilo", "lima"};
+int RANGE = 20;
+
+string dictionary[] = {"alabama", "arkansas", "colorado", "delaware", "georgia", "illinois", "kansas", "louisiana", "maryland", "michigan",
+			"montana", "nebraska", "oklahoma", "oregon", "texas", "utah", "vermont", "washington", "virginia", "vyoming"};
 
 string checkMove(char userInput, string openWord, string dottedWord);
 
 string getRandomWord() {
     
-    int selected = (rand() % (range));
+    int selected = (rand() % (RANGE));
     string result = dictionary[selected];
     string temp = dictionary[selected];
-    dictionary[selected] = dictionary[range - 1];
-    dictionary[range - 1] = temp;
-    range--;
+    dictionary[selected] = dictionary[RANGE - 1];
+    dictionary[RANGE - 1] = temp;
+    RANGE--;
     return result;
     
     /* THIS CODE ALSO WORKS, JUST REMOVE 8//8 SIGNS
     //string dictionary[] = {"alpha", "bravo", "charlie", "delta", "echo"};
     //srand(time(0));
-    int selected = (rand() % (range));
+    int selected = (rand() % (RANGE));
     while (dictionary[selected] == "$$$") {
         cout << "Inside while" << endl;
-        selected = (rand() % (range));
+        selected = (rand() % (RANGE));
     }
     string result = dictionary[selected];
     
@@ -35,15 +37,6 @@ string getRandomWord() {
     
     return result;*/
 }
-
-/*string getRandomWord() {
-	string words[] = {"alpha", "bravo", "charlie", "delta", "echo"};
-	int selected = (rand() % 5);
-	cout << "selected is " << selected << " and the word is "<<  words[selected] << endl;
-	
-	return words[selected];
-	//return "zaazzzaaertaazjhf";
-}*/
 
 int calculatePoints() {
 	cout << "Points at start: " << POINTSCOUNTER << endl;
@@ -72,30 +65,31 @@ string checkMove(char userInput, string openWord, string dottedWord) {
 		POINTSCOUNTER++;
 		if (POINTSCOUNTER == 10) {
 			cout << "Sorry, you have lost!" << endl;
+			cout << "You have guessed " << WORDSGUESSED << "of 20 words." << endl;
 			GAMEOVER = true;
 			return 0;
 		}
 	} else {
-		string foo;
-		foo.replace(0, 1, 1, userInput);
+		string line;
+		line.replace(0, 1, 1, userInput);
 		for (int i = 0; i < counter; i++){
 			//cout << "Position of letter " << userInput << ": " << result[i] << endl;
-			dottedWord.replace(result[i], 1, foo);
+			dottedWord.replace(result[i], 1, line);
 			//output.replace(3, 1, "z");    <- works, note that z is in "" ("z"; a string).
 		}
 	}
 	//cout << "Output line: " << dottedWord << endl;
 	
 	if (dottedWord.find(".") == string::npos) {
-		if (STEPSTOWIN == 1) {
+		if (WORDSGUESSED == 19) {
 			cout << "Congratulations, you have won this game!" << endl;
 			GAMEOVER = true;
 			return 0;
 		} else {
-			cout << "OK you have guessed this word!" << endl;
+			cout << "OK, you have guessed this word!" << endl;
 			calculatePoints();
-			STEPSTOWIN--;
-			cout << STEPSTOWIN << " more and victory is yours!" << endl;
+			WORDSGUESSED++;
+			cout << "That was word " << WORDSGUESSED << " of 20!" << endl;
 		}
 	}
 	
@@ -172,8 +166,6 @@ int main() {
         }
     }
     cout << "Output line: " << output << endl;*/
-	
-	
 	
 	
     return 0;
