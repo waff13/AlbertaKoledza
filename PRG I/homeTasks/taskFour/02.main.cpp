@@ -93,7 +93,6 @@ string checkMove(char userInput, string openWord, string dottedWord) {
 			cout << "That was word " << WORDSGUESSED << " of 20!" << endl;
 		}
 	}
-	
 	return dottedWord;
 }
 
@@ -125,6 +124,5 @@ int main() {
 			cout << "Now -> " << dottedWord << endl;
 		}
 	}
-
 return 0;
 }
