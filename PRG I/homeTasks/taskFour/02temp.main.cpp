@@ -6,18 +6,44 @@ using namespace std;
 int POINTSCOUNTER = 0;
 int STEPSTOWIN = 5;
 bool GAMEOVER = false;
+int range = 10;
+string dictionary[] = {"alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "india", "kilo", "lima"};
 
 string checkMove(char userInput, string openWord, string dottedWord);
 
-
 string getRandomWord() {
+    
+    int selected = (rand() % (range));
+    string result = dictionary[selected];
+    string temp = dictionary[selected];
+    dictionary[selected] = dictionary[range - 1];
+    dictionary[range - 1] = temp;
+    range--;
+    return result;
+    
+    /* THIS CODE ALSO WORKS, JUST REMOVE 8//8 SIGNS
+    //string dictionary[] = {"alpha", "bravo", "charlie", "delta", "echo"};
+    //srand(time(0));
+    int selected = (rand() % (range));
+    while (dictionary[selected] == "$$$") {
+        cout << "Inside while" << endl;
+        selected = (rand() % (range));
+    }
+    string result = dictionary[selected];
+    
+    dictionary[selected] = "$$$";
+    
+    return result;*/
+}
+
+/*string getRandomWord() {
 	string words[] = {"alpha", "bravo", "charlie", "delta", "echo"};
 	int selected = (rand() % 5);
 	cout << "selected is " << selected << " and the word is "<<  words[selected] << endl;
 	
 	return words[selected];
 	//return "zaazzzaaertaazjhf";
-}
+}*/
 
 int calculatePoints() {
 	cout << "Points at start: " << POINTSCOUNTER << endl;
