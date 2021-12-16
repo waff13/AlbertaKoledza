@@ -1,8 +1,9 @@
 // The game where user has to guess 20 words letter by letter.
 
 #include <iostream>
-#include <string>
-#include <stdlib.h>
+//#include <string>
+//#include <stdlib.h>
+#include <conio.h>
 #include <time.h> 
 
 using namespace std;
@@ -44,12 +45,12 @@ string getRandomWord() {
 }
 
 int calculatePoints() {
-	cout << "Points at start: " << POINTSCOUNTER << endl;
+	//cout << "Points at start: " << POINTSCOUNTER << endl;
 	POINTSCOUNTER = POINTSCOUNTER - 5; // discarding 5 points from penalty score
 	if (POINTSCOUNTER < 0) { // if number of points is less than 0 we use 0 as this number cannot be negative
 		POINTSCOUNTER = 0;
 	}
-	cout << "Points after calculations: " << POINTSCOUNTER << endl;
+	cout << "Your points: " << POINTSCOUNTER << "/10" << endl;
 	return POINTSCOUNTER;
 }
 
@@ -83,7 +84,7 @@ string checkMove(char userInput, string openWord, string dottedWord) {
 			//output.replace(3, 1, "z");    <- works, note that z is in "" ("z"; a string).
 		}
 	}
-	//cout << "Output line: " << dottedWord << endl;
+	cout << "Your word: " << dottedWord << endl;
 	
 	if (dottedWord.find(".") == string::npos) { // if the are no more . in the word that means the user have guessed the word
 		if (WORDSGUESSED == 19) { // if guessed words counter reaches 19 this means all the words are guessed and user has won
@@ -112,7 +113,7 @@ int main() {
 		}
 		
 		//cout << "  openWord: " << openWord << endl;
-		//cout << "dottedWord: " << dottedWord << endl;
+		cout << "Your word: " << dottedWord << endl;
 		
 		char userInput;
 		//while(userInput != 48)
@@ -125,7 +126,7 @@ int main() {
 			}
 			//cout << userInput << ": " << (int)userInput << endl;
 			dottedWord = checkMove(userInput, openWord, dottedWord); // checking if the user has guessed the letter and word 
-			cout << "Now -> " << dottedWord << endl;
+			//cout << "this dotted word: " << dottedWord << endl;
 		}
 	}
 return 0;
