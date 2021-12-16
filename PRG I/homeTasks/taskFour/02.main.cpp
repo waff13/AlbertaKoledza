@@ -1,3 +1,5 @@
+// The game where user has to guess 20 words letter by letter.
+
 #include <iostream>
 #include <string>
 #include <stdlib.h>
@@ -20,10 +22,10 @@ string getRandomWord() {
     srand (time(NULL)); // initializing random seed
     int selected = (rand() % (RANGE)); // getting random number
     string result = dictionary[selected]; // getting the word from dictionary with that random number
-    string temp = dictionary[selected]; // and then moving this word to the end of the array
-    dictionary[selected] = dictionary[RANGE - 1];
+    string temp = dictionary[selected]; 
+    dictionary[selected] = dictionary[RANGE - 1]; // and then moving this word to the end of the array
     dictionary[RANGE - 1] = temp;
-    RANGE--; // and shortening the array so the used words are in the end of array and not used while selecting new random words
+    RANGE--; // and "shortening" the array so the used words are in the end of array and not used while selecting new random words
     return result;
     
     /* THIS CODE ALSO WORKS, JUST REMOVE 8//8 SIGNS
