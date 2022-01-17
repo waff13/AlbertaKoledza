@@ -33,16 +33,87 @@ void addRecord() {
 	}
 	
 	dbFile.close();
-	
 }
 
 void changeBalance() {
-	cout << "\nChanging a balance...\n" << endl;
+	// cout << "\n[DONE] Changing a balance...\n" << endl;
 	
+	clientData client;
+	fstream dbFile;
+	//int zero = 0;
+	int userInput;
+	float newBalance;
+	bool isFound = false;
+	
+	cout << "Please input account number to change balance: ";
+	cin >> userInput;
+	
+	dbFile.open("database.dat", ios::in | ios::out | ios::binary);
+	dbFile.read((char*)&client, sizeof(clientData));
+	
+	while(dbFile) {
+		if (client.accNum == userInput) {
+			cout << "Please input new balance for this account: ";
+			cin >> newBalance;
+			
+			//cout << "Ok, we will set " << newBalance << " as a new balance for account " << userInput << endl;
+			dbFile.seekp((client.accNum-1) * sizeof(client));
+			//cout << setw(10) << "Deleting this:" << setw(10) << client.accNum << setw(10) << client.Sur << setw(10) << client.Name << setw(10) << client.balance << endl;
+			client.balance = newBalance;
+			dbFile.write((char*)&client, sizeof(clientData));
+			isFound = true;
+			break;
+		} 
+		//THIS ONE -OK-  dbFile.read((char*)&client, sizeof(clientData));
+	}
+	
+	if (!isFound) {
+		cout << "\nThere are no records with this account number in this database!\n" << endl;
+	}
+	
+	dbFile.close();
 }
 
 void copyDB() {
-	cout << "\nCopying a database...\n" << endl;
+	//cout << "\n[DONE] Copying a database...\n" << endl;
+	
+	fstream fails_no ("database.dat", ios::in);
+	fstream fails_uz ("database_copy.dat", ios::out);
+	char symbol;
+	fails_no.get(symbol);
+	
+	while (fails_no) {
+		fails_uz.put(symbol);
+		fails_no.get(symbol);
+	}
+	
+	fails_uz.close();
+	fails_no.close();
+	
+	/*cout << "And check that everything is copied right\n" << endl;
+	
+	clientData client;
+	fstream dbFile;
+	bool isFound = false;
+	
+	dbFile.open("database_copy.dat", ios::in | ios::binary);
+	cout << setw(10) << "Account" << setw(10) << "Surname" << setw(10) << "Name" << setw(10) << "Balance" << endl;
+	dbFile.read((char*)&client, sizeof(clientData));
+	
+	while(dbFile) {
+		if (client.accNum != 0) {
+			cout << setw(10) << client.accNum << setw(10) << client.Sur << setw(10) << client.Name << setw(10) << client.balance << endl;
+			isFound = true;
+		}
+		dbFile.read((char*)&client, sizeof(clientData));
+	}
+	
+	if (!isFound) {
+		cout << "\n   There are no records in this database!\n" << endl; 
+	}
+	
+	dbFile.close();*/
+	
 }
 
 void countRecords() {
@@ -62,7 +133,7 @@ void countRecords() {
 		dbFile.read((char*)&client, sizeof(clientData));
 	}
 	
-	cout << setw(10) << "\nThere are " << counter << " record(s) in this database!\n" << endl;
+	cout << "\nThere are " << counter << " record(s) in this database!\n" << endl;
 	
 	dbFile.close();
 }
@@ -94,7 +165,7 @@ void deleteRecord() {
 	}
 	
 	if (!isFound) {
-		cout << setw(10) << "\nThere are no records with this account number in this database!\n" << endl;
+		cout << "\nThere are no records with this account number in this database!\n" << endl;
 	}
 	
 	dbFile.close();
@@ -147,7 +218,7 @@ void displayNegative () {
 	}
 
 	if (!isFound) {
-		cout << setw(10) << "\nThere are no accounts with negative balance!\n" << endl;
+		cout << "\n   There are no accounts with negative balance!\n" << endl;
 	}
 	
 	dbFile.close();
@@ -164,7 +235,30 @@ void findRecord() {
 	cout << "Please input account number to search for: ";
 	cin >> userInput;
 	
-	dbFile.open("database.dat", ios::in | ios::binary);
+	if (userInput > 0) {
+		dbFile.open("database.dat", ios::in | ios::binary);
+		dbFile.read((char*)&client, sizeof(clientData));
+		
+		while(dbFile) {
+			if (client.accNum == userInput) {
+				cout << setw(10) << "Account" << setw(10) << "Surname" << setw(10) << "Name" << setw(10) << "Balance" << endl;
+				cout << setw(10) << client.accNum << setw(10) << client.Sur << setw(10) << client.Name << setw(10) << client.balance << endl;
+				isFound = true;
+			}
+			dbFile.read((char*)&client, sizeof(clientData));
+		}
+		
+		if (!isFound) {
+			cout << setw(10) << "\nNo such account number!\n" << endl;
+		}
+		
+		dbFile.close();
+		
+	} else {
+		cout << setw(10) << "\nNooooo such account number!\n" << endl;
+	}
+	
+	/*dbFile.open("database.dat", ios::in | ios::binary);
 	dbFile.read((char*)&client, sizeof(clientData));
 	
 	while(dbFile) {
@@ -180,5 +274,5 @@ void findRecord() {
 		cout << setw(10) << "\nNo such account number!\n" << endl;
 	}
 
-	dbFile.close();
+	dbFile.close();*/
 }
