@@ -25,15 +25,15 @@ void displayMenu() {
 	bool QUIT = false;
 	while (!QUIT) {
 		
-		cout << "Select an operation:" << endl;
+		cout << "\nSelect an operation:" << endl;
 		cout << "1. Add a record" << endl;
 		cout << "2. Delete a record" << endl;
 		cout << "3. Display all records" << endl;
 		cout << "4. Find a record" << endl;
-		cout << "5. -- Change account's balance" << endl;
+		cout << "5. Change account's balance" << endl;
 		cout << "6. Display accounts with negative balance" << endl;
 		cout << "7. Count all records" << endl;
-		cout << "8. -- Make a copy of this DB" << endl;
+		cout << "8. Make a copy of this DB" << endl;
 		cout << "0. Exit\n" << endl;
 		char userInput;
 		cin >> userInput;
