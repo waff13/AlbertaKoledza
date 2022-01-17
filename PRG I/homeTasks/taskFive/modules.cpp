@@ -59,16 +59,16 @@ void changeBalance() {
 			//cout << "Ok, we will set " << newBalance << " as a new balance for account " << userInput << endl;
 			dbFile.seekp((client.accNum-1) * sizeof(client));
 			//cout << setw(10) << "Deleting this:" << setw(10) << client.accNum << setw(10) << client.Sur << setw(10) << client.Name << setw(10) << client.balance << endl;
-			client.balance = newBalance;
+			client.balance = client.balance + newBalance;
 			dbFile.write((char*)&client, sizeof(clientData));
 			isFound = true;
 			break;
 		} 
-		//THIS ONE -OK-  dbFile.read((char*)&client, sizeof(clientData));
+		dbFile.read((char*)&client, sizeof(clientData));
 	}
 	
 	if (!isFound) {
-		cout << "\nThere are no records with this account number in this database!\n" << endl;
+		cout << "\nThere are no records with this account number in this database!" << endl;
 	}
 	
 	dbFile.close();
@@ -90,7 +90,8 @@ void copyDB() {
 	fails_uz.close();
 	fails_no.close();
 	
-	/*cout << "And check that everything is copied right\n" << endl;
+	cout << "Database copied to database_copy.dat" << endl;
+	/*cout << "And now lets check that everything is copied right\n" << endl;
 	
 	clientData client;
 	fstream dbFile;
@@ -133,7 +134,7 @@ void countRecords() {
 		dbFile.read((char*)&client, sizeof(clientData));
 	}
 	
-	cout << "\nThere are " << counter << " record(s) in this database!\n" << endl;
+	cout << "\nThere are " << counter << " record(s) in this database!" << endl;
 	
 	dbFile.close();
 }
@@ -165,7 +166,7 @@ void deleteRecord() {
 	}
 	
 	if (!isFound) {
-		cout << "\nThere are no records with this account number in this database!\n" << endl;
+		cout << "\nThere are no records with this account number in this database!" << endl;
 	}
 	
 	dbFile.close();
@@ -191,7 +192,7 @@ void displayAll() {
 	}
 	
 	if (!isFound) {
-		cout << "\n   There are no records in this database!\n" << endl; 
+		cout << "\n   There are no records in this database!" << endl; 
 	}
 	
 	dbFile.close();
@@ -218,7 +219,7 @@ void displayNegative () {
 	}
 
 	if (!isFound) {
-		cout << "\n   There are no accounts with negative balance!\n" << endl;
+		cout << "\n   There are no accounts with negative balance!" << endl;
 	}
 	
 	dbFile.close();
@@ -249,13 +250,13 @@ void findRecord() {
 		}
 		
 		if (!isFound) {
-			cout << setw(10) << "\nNo such account number!\n" << endl;
+			cout << setw(10) << "\nNo such account number!" << endl;
 		}
 		
 		dbFile.close();
 		
 	} else {
-		cout << setw(10) << "\nNooooo such account number!\n" << endl;
+		cout << setw(10) << "\nNo such account number!" << endl;
 	}
 	
 	/*dbFile.open("database.dat", ios::in | ios::binary);
