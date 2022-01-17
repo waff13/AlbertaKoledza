@@ -53,7 +53,7 @@ void changeBalance() {
 	
 	while(dbFile) {
 		if (client.accNum == userInput) {
-			cout << "Please input new balance for this account: ";
+			cout << "Please input balance change for this account: ";
 			cin >> newBalance;
 			
 			//cout << "Ok, we will set " << newBalance << " as a new balance for account " << userInput << endl;
